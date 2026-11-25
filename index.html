@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Drop, preview and organize images locally in your browser.">
+  <meta name="theme-color" content="#f5f6fb">
+  <title>Dropzone — Image Uploader</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar"><div class="top-inner"><a class="brand" href="./" aria-label="Dropzone home"><span class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4m-5 5 5-5 5 5M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>dropzone<span class="brand-dot">.</span></a><span class="privacy"><span class="privacy-dot"></span> Private by design</span></div></header>
+  <main class="layout">
+    <section class="intro"><span class="eyebrow">YOUR LOCAL IMAGE WORKSPACE</span><h1>Drop it. <span>See it.</span> Keep it.</h1><p>A simple space to upload, preview and save your images — right in your browser.</p></section>
+    <div class="workspace">
+      <section class="panel upload-panel" aria-labelledby="upload-heading">
+        <div class="section-heading"><div><span class="step">01 / UPLOAD</span><h2 id="upload-heading">Add images</h2></div><span class="small-tag">JPG · PNG · GIF</span></div>
+        <div id="drop-zone" class="drop-zone">
+          <div class="upload-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 33H11a8 8 0 0 1-1-16 14 14 0 0 1 27-1 9 9 0 0 1 0 17h-3M24 38V21m-7 7 7-7 7 7"/></svg></div>
+          <h3>Drag &amp; drop your images here</h3><p>or choose files from your device</p>
+          <button type="button" id="browse" class="primary">Browse files <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <input id="file-input" type="file" accept="image/jpeg,image/png,image/gif,.jpg,.jpeg,.png,.gif" multiple hidden>
+          <small>Maximum 5 MB per image · Multiple files supported</small>
+        </div>
+        <div id="messages" class="messages" role="alert" hidden></div>
+        <div class="queue-heading"><h3>Upload activity</h3><span id="queue-count">No active uploads</span></div>
+        <div id="queue" class="queue" aria-label="Upload progress"></div>
+        <p id="queue-empty" class="queue-empty">Your upload progress will appear here.</p>
+        <p class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3"/></svg> Images stay on this device. Upload progress is simulated; no server receives your files.</p>
+      </section>
+      <section class="panel gallery-panel" aria-labelledby="gallery-heading">
+        <div class="section-heading"><div><span class="step">02 / PREVIEW</span><h2 id="gallery-heading">Your gallery <span id="gallery-count" class="count">0</span></h2></div><button id="clear-all" type="button" class="text-button" disabled>Clear all</button></div>
+        <div class="storage"><div><span class="storage-title">Local storage</span><span id="storage-label" class="storage-label">0 KB saved</span></div><div class="storage-track"><div id="storage-fill"></div></div><p id="storage-note">Saved images reappear after a page refresh.</p></div>
+        <div id="gallery" class="gallery"></div>
+        <div id="empty-gallery" class="empty-gallery"><div class="empty-art" aria-hidden="true"><svg viewBox="0 0 96 84" fill="none"><rect x="20" y="9" width="60" height="56" rx="8" transform="rotate(10 20 9)" fill="#e7e7fb" stroke="#c7c8f1"/><rect x="12" y="15" width="65" height="57" rx="8" fill="#f8f8ff" stroke="#a9a9e7" stroke-width="1.5"/><circle cx="32" cy="32" r="5" fill="#b8b7ef"/><path d="m15 61 17-17 12 10 11-15 19 21v4a5 5 0 0 1-5 5H20a5 5 0 0 1-5-5z" fill="#c9c8f5"/><circle cx="76" cy="65" r="12" fill="#6155db"/><path d="M76 60v10m-5-5h10" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div><h3>Nothing here yet</h3><p>Add your first image to see it in your gallery.</p></div>
+      </section>
+    </div>
+    <footer><span>DROPZONE / FRONTEND PROJECT</span><span>HTML · CSS · JavaScript</span></footer>
+  </main>
+  <dialog id="preview-dialog" aria-labelledby="preview-title"><div class="dialog-heading"><h2 id="preview-title">Image preview</h2><button id="close-preview" type="button" class="icon-button" aria-label="Close preview">×</button></div><img id="large-preview" alt="Selected image"><p id="preview-detail"></p></dialog>
+  <dialog id="clear-dialog" aria-labelledby="clear-title"><h2 id="clear-title">Clear your gallery?</h2><p>This removes all saved images from this browser. It does not delete the original files on your device.</p><div class="dialog-actions"><button id="cancel-clear" type="button" class="secondary">Cancel</button><button id="confirm-clear" type="button" class="danger">Clear images</button></div></dialog>
+  <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+</body>
+</html>
